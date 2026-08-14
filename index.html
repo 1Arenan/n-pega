@@ -1,37 +1,298 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Instagram</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #111;
-      font-family: Arial, sans-serif;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instagram — Simulação</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #fafafa;
+    color: #262626;
+}
+
+/* Barra lateral */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 245px;
+    height: 100vh;
+    background: white;
+    border-right: 1px solid #ddd;
+    padding: 35px 20px;
+}
+
+.logo {
+    font-family: cursive;
+    font-size: 29px;
+    margin: 0 15px 40px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.menu button {
+    border: 0;
+    background: transparent;
+    text-align: left;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: default;
+}
+
+.menu button:hover {
+    background: #f2f2f2;
+}
+
+/* Conteúdo */
+.content {
+    margin-left: 245px;
+    width: calc(100% - 245px);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.center {
+    width: 630px;
+    padding-top: 35px;
+}
+
+/* Stories */
+.stories {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 18px;
+    display: flex;
+    gap: 18px;
+    overflow: hidden;
+}
+
+.story {
+    width: 65px;
+    flex-shrink: 0;
+    text-align: center;
+    font-size: 12px;
+}
+
+.avatar {
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    padding: 3px;
+    background: linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
+    margin-bottom: 6px;
+}
+
+.avatar div {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #ddd;
+    border: 3px solid white;
+}
+
+/* Post */
+.post {
+    margin-top: 25px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.post-header {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    gap: 10px;
+}
+
+.small-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: linear-gradient(45deg,#ff9a00,#d62976,#4f5bd5);
+}
+
+.username {
+    font-weight: bold;
+}
+
+.post-image {
+    height: 520px;
+    background:
+        linear-gradient(
+            135deg,
+            #ffcf70,
+            #ff8b7b 35%,
+            #b55ee5 65%,
+            #4e75d9
+        );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.actions {
+    padding: 12px 15px;
+    font-size: 25px;
+    display: flex;
+    gap: 18px;
+}
+
+.caption {
+    padding: 0 15px 18px;
+    line-height: 1.5;
+}
+
+.likes {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+/* Responsivo */
+@media(max-width: 800px) {
+    .sidebar {
+        width: 70px;
+        padding: 20px 8px;
     }
 
-    a {
-      padding: 15px 30px;
-      color: white;
-      background: linear-gradient(45deg, #feda75, #d62976, #4f5bd5);
-      border-radius: 10px;
-      text-decoration: none;
-      font-size: 20px;
-      font-weight: bold;
+    .logo {
+        font-size: 0;
+        margin-bottom: 35px;
     }
-  </style>
+
+    .logo::after {
+        content: "◎";
+        font-size: 30px;
+    }
+
+    .menu button {
+        font-size: 0;
+        text-align: center;
+    }
+
+    .menu button::first-letter {
+        font-size: 22px;
+    }
+
+    .content {
+        margin-left: 70px;
+        width: calc(100% - 70px);
+    }
+
+    .center {
+        width: 95%;
+    }
+}
+</style>
 </head>
+
 <body>
 
-  <a href="https://www.instagram.com/" target="_blank">
-    Abrir Instagram
-  </a>
+<div class="sidebar">
+
+    <div class="logo">Instagram</div>
+
+    <div class="menu">
+        <button>🏠 &nbsp; Página inicial</button>
+        <button>🔍 &nbsp; Pesquisar</button>
+        <button>🧭 &nbsp; Explorar</button>
+        <button>🎬 &nbsp; Reels</button>
+        <button>✉️ &nbsp; Mensagens</button>
+        <button>❤️ &nbsp; Notificações</button>
+        <button>➕ &nbsp; Criar</button>
+        <button>👤 &nbsp; Perfil</button>
+    </div>
+
+</div>
+
+<div class="content">
+
+    <main class="center">
+
+        <div class="stories">
+
+            <div class="story">
+                <div class="avatar"><div></div></div>
+                Você
+            </div>
+
+            <div class="story">
+                <div class="avatar"><div></div></div>
+                usuario01
+            </div>
+
+            <div class="story">
+                <div class="avatar"><div></div></div>
+                maria
+            </div>
+
+            <div class="story">
+                <div class="avatar"><div></div></div>
+                joao
+            </div>
+
+            <div class="story">
+                <div class="avatar"><div></div></div>
+                gamer
+            </div>
+
+            <div class="story">
+                <div class="avatar"><div></div></div>
+                amigo
+            </div>
+
+        </div>
+
+        <div class="post">
+
+            <div class="post-header">
+                <div class="small-avatar"></div>
+                <span class="username">usuario_exemplo</span>
+            </div>
+
+            <div class="post-image">
+                FOTO
+            </div>
+
+            <div class="actions">
+                ♡
+                💬
+                ➤
+            </div>
+
+            <div class="caption">
+                <div class="likes">1.234 curtidas</div>
+
+                <b>usuario_exemplo</b>
+                Esta é uma página de demonstração visual.
+                <br><br>
+                <span style="color:#777">Ver todos os 42 comentários</span>
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
 
 </body>
 </html>
-
