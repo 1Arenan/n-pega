@@ -1,298 +1,393 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Instagram — Simulação</title>
-
-<style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #fafafa;
-    color: #262626;
-}
-
-/* Barra lateral */
-.sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 245px;
-    height: 100vh;
-    background: white;
-    border-right: 1px solid #ddd;
-    padding: 35px 20px;
-}
-
-.logo {
-    font-family: cursive;
-    font-size: 29px;
-    margin: 0 15px 40px;
-}
-
-.menu {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.menu button {
-    border: 0;
-    background: transparent;
-    text-align: left;
-    padding: 14px;
-    border-radius: 10px;
-    font-size: 16px;
-    cursor: default;
-}
-
-.menu button:hover {
-    background: #f2f2f2;
-}
-
-/* Conteúdo */
-.content {
-    margin-left: 245px;
-    width: calc(100% - 245px);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-}
-
-.center {
-    width: 630px;
-    padding-top: 35px;
-}
-
-/* Stories */
-.stories {
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 18px;
-    display: flex;
-    gap: 18px;
-    overflow: hidden;
-}
-
-.story {
-    width: 65px;
-    flex-shrink: 0;
-    text-align: center;
-    font-size: 12px;
-}
-
-.avatar {
-    width: 62px;
-    height: 62px;
-    border-radius: 50%;
-    padding: 3px;
-    background: linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
-    margin-bottom: 6px;
-}
-
-.avatar div {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: #ddd;
-    border: 3px solid white;
-}
-
-/* Post */
-.post {
-    margin-top: 25px;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-}
-
-.post-header {
-    height: 60px;
-    display: flex;
-    align-items: center;
-    padding: 10px 15px;
-    gap: 10px;
-}
-
-.small-avatar {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    background: linear-gradient(45deg,#ff9a00,#d62976,#4f5bd5);
-}
-
-.username {
-    font-weight: bold;
-}
-
-.post-image {
-    height: 520px;
-    background:
-        linear-gradient(
-            135deg,
-            #ffcf70,
-            #ff8b7b 35%,
-            #b55ee5 65%,
-            #4e75d9
-        );
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-size: 48px;
-    font-weight: bold;
-}
-
-.actions {
-    padding: 12px 15px;
-    font-size: 25px;
-    display: flex;
-    gap: 18px;
-}
-
-.caption {
-    padding: 0 15px 18px;
-    line-height: 1.5;
-}
-
-.likes {
-    font-weight: bold;
-    margin-bottom: 8px;
-}
-
-/* Responsivo */
-@media(max-width: 800px) {
-    .sidebar {
-        width: 70px;
-        padding: 20px 8px;
-    }
-
-    .logo {
-        font-size: 0;
-        margin-bottom: 35px;
-    }
-
-    .logo::after {
-        content: "◎";
-        font-size: 30px;
-    }
-
-    .menu button {
-        font-size: 0;
-        text-align: center;
-    }
-
-    .menu button::first-letter {
-        font-size: 22px;
-    }
-
-    .content {
-        margin-left: 70px;
-        width: calc(100% - 70px);
-    }
-
-    .center {
-        width: 95%;
-    }
-}
-</style>
+    <meta charset="UTF-8">
+    <title>Corrida 3D - Obstáculos Estilizados</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #030308;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            user-select: none;
+        }
+        #ui {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+            font-weight: 800;
+            color: #fff;
+            text-shadow: 0 0 12px #00f0ff, 2px 2px 6px #000;
+            z-index: 10;
+        }
+        #game-over {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(10, 10, 20, 0.95);
+            padding: 40px 60px;
+            border: 2px solid #ff0055;
+            border-radius: 16px;
+            text-align: center;
+            display: none;
+            z-index: 20;
+            box-shadow: 0 0 40px rgba(255, 0, 85, 0.5);
+            backdrop-filter: blur(8px);
+        }
+        #game-over h1 { color: #ff0055; margin-top: 0; font-size: 38px; text-shadow: 0 0 15px #ff0055; }
+        #game-over p { font-size: 18px; color: #cccccc; }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
-
 <body>
 
-<div class="sidebar">
-
-    <div class="logo">Instagram</div>
-
-    <div class="menu">
-        <button>🏠 &nbsp; Página inicial</button>
-        <button>🔍 &nbsp; Pesquisar</button>
-        <button>🧭 &nbsp; Explorar</button>
-        <button>🎬 &nbsp; Reels</button>
-        <button>✉️ &nbsp; Mensagens</button>
-        <button>❤️ &nbsp; Notificações</button>
-        <button>➕ &nbsp; Criar</button>
-        <button>👤 &nbsp; Perfil</button>
+    <div id="ui">⚡ PONTOS: <span id="score">0</span></div>
+    
+    <div id="game-over">
+        <h1>BATIDA INEVITÁVEL! 💥</h1>
+        <p>Seu veículo colidiu com um obstáculo na pista.</p>
+        <p>Aperte <b>F5</b> para reiniciar a corrida.</p>
     </div>
 
-</div>
+    <script>
+        // --- CENA & RENDERER ---
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x050512);
+        scene.fog = new THREE.FogExp2(0x050512, 0.0075);
 
-<div class="content">
+        const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 1000);
+        
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.2;
+        document.body.appendChild(renderer.domElement);
 
-    <main class="center">
+        // --- ILUMINAÇÃO ---
+        const ambientLight = new THREE.AmbientLight(0x7788aa, 0.8);
+        scene.add(ambientLight);
 
-        <div class="stories">
+        const dirLight = new THREE.DirectionalLight(0xffffff, 1.4);
+        dirLight.position.set(30, 50, 20);
+        dirLight.castShadow = true;
+        dirLight.shadow.mapSize.width = 1024;
+        dirLight.shadow.mapSize.height = 1024;
+        scene.add(dirLight);
 
-            <div class="story">
-                <div class="avatar"><div></div></div>
-                Você
-            </div>
+        const sideLight = new THREE.PointLight(0xff0055, 1.5, 60);
+        sideLight.position.set(-20, 10, -30);
+        scene.add(sideLight);
 
-            <div class="story">
-                <div class="avatar"><div></div></div>
-                usuario01
-            </div>
+        // --- PISTA ---
+        const roadWidth = 15;
+        const roadLength = 300;
 
-            <div class="story">
-                <div class="avatar"><div></div></div>
-                maria
-            </div>
+        const roadGeo = new THREE.PlaneGeometry(roadWidth, roadLength);
+        const roadMat = new THREE.MeshStandardMaterial({ color: 0x121218, roughness: 0.5, metalness: 0.2 });
+        const road = new THREE.Mesh(roadGeo, roadMat);
+        road.rotation.x = -Math.PI / 2;
+        road.receiveShadow = true;
+        scene.add(road);
 
-            <div class="story">
-                <div class="avatar"><div></div></div>
-                joao
-            </div>
+        // Faixas na pista
+        const stripes = [];
+        const stripeGeo = new THREE.PlaneGeometry(0.35, 4.5);
+        const stripeMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+        
+        [-2.5, 2.5].forEach(laneX => {
+            for (let z = -roadLength / 2; z < roadLength / 2; z += 10) {
+                const stripe = new THREE.Mesh(stripeGeo, stripeMat);
+                stripe.rotation.x = -Math.PI / 2;
+                stripe.position.set(laneX, 0.02, z);
+                scene.add(stripe);
+                stripes.push(stripe);
+            }
+        });
 
-            <div class="story">
-                <div class="avatar"><div></div></div>
-                gamer
-            </div>
+        // Rodas Estilizadas
+        function createWheel(radius, width) {
+            const wheelGroup = new THREE.Group();
+            const tire = new THREE.Mesh(
+                new THREE.CylinderGeometry(radius, radius, width, 24),
+                new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.8 })
+            );
+            tire.rotation.z = Math.PI / 2;
+            wheelGroup.add(tire);
 
-            <div class="story">
-                <div class="avatar"><div></div></div>
-                amigo
-            </div>
+            const rim = new THREE.Mesh(
+                new THREE.CylinderGeometry(radius * 0.6, radius * 0.6, width + 0.02, 12),
+                new THREE.MeshStandardMaterial({ color: 0xcccccc, metalness: 0.9, roughness: 0.1 })
+            );
+            rim.rotation.z = Math.PI / 2;
+            wheelGroup.add(rim);
+            return wheelGroup;
+        }
 
-        </div>
+        // --- PLAYER CAR ---
+        function createPlayerCar() {
+            const group = new THREE.Group();
+            const paintMat = new THREE.MeshPhysicalMaterial({ color: 0x00f0ff, metalness: 0.8, roughness: 0.1, clearcoat: 1.0 });
+            const glassMat = new THREE.MeshPhysicalMaterial({ color: 0x050a12, metalness: 0.9, transparent: true, opacity: 0.8 });
 
-        <div class="post">
+            const body = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.5, 3.8), paintMat);
+            body.position.y = 0.6;
+            group.add(body);
 
-            <div class="post-header">
-                <div class="small-avatar"></div>
-                <span class="username">usuario_exemplo</span>
-            </div>
+            const cabin = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.5, 1.8), glassMat);
+            cabin.position.set(0, 1.0, -0.1);
+            group.add(cabin);
 
-            <div class="post-image">
-                FOTO
-            </div>
+            [[-1.05, 0.38, 1.2], [1.05, 0.38, 1.2], [-1.05, 0.38, -1.2], [1.05, 0.38, -1.2]].forEach(pos => {
+                const w = createWheel(0.38, 0.3);
+                w.position.set(...pos);
+                group.add(w);
+            });
 
-            <div class="actions">
-                ♡
-                💬
-                ➤
-            </div>
+            const glow = new THREE.Mesh(new THREE.PlaneGeometry(2.4, 4.2), new THREE.MeshBasicMaterial({ color: 0x00f0ff, transparent: true, opacity: 0.6 }));
+            glow.rotation.x = -Math.PI / 2;
+            glow.position.y = 0.05;
+            group.add(glow);
 
-            <div class="caption">
-                <div class="likes">1.234 curtidas</div>
+            return group;
+        }
 
-                <b>usuario_exemplo</b>
-                Esta é uma página de demonstração visual.
-                <br><br>
-                <span style="color:#777">Ver todos os 42 comentários</span>
-            </div>
+        // --- OBSTÁCULOS 3D MELHORADOS ---
 
-        </div>
+        // 1. CARRO ESPORTIVO RIVAL
+        function createRivalSportsCar() {
+            const group = new THREE.Group();
+            const paint = new THREE.MeshPhysicalMaterial({ color: 0xff0044, metalness: 0.85, roughness: 0.15, clearcoat: 1.0 });
+            const glass = new THREE.MeshPhysicalMaterial({ color: 0x111111, roughness: 0.0, transparent: true, opacity: 0.9 });
+            const carbon = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.4 });
 
-    </main>
+            // Corpo Esportivo Aerodinâmico
+            const body = new THREE.Mesh(new THREE.BoxGeometry(2.1, 0.45, 4.2), paint);
+            body.position.y = 0.5;
+            group.add(body);
 
-</div>
+            const hood = new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.2, 1.2), paint);
+            hood.position.set(0, 0.65, -1.2);
+            hood.rotation.x = 0.1;
+            group.add(hood);
 
+            const cabin = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.48, 2.0), glass);
+            cabin.position.set(0, 0.92, -0.1);
+            group.add(cabin);
+
+            // Aerofólio Neon
+            const wing = new THREE.Mesh(new THREE.BoxGeometry(2.1, 0.08, 0.4), carbon);
+            wing.position.set(0, 1.1, 1.8);
+            group.add(wing);
+
+            // Neon Underglow Vermelho
+            const underglow = new THREE.Mesh(new THREE.PlaneGeometry(2.4, 4.4), new THREE.MeshBasicMaterial({ color: 0xff0044, transparent: true, opacity: 0.6 }));
+            underglow.rotation.x = -Math.PI / 2;
+            underglow.position.y = 0.05;
+            group.add(underglow);
+
+            // Lanternas em LED
+            const tail = new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.1, 0.1), new THREE.MeshBasicMaterial({ color: 0xff0000 }));
+            tail.position.set(0, 0.6, 2.11);
+            group.add(tail);
+
+            [[-1.08, 0.38, 1.2], [1.08, 0.38, 1.2], [-1.08, 0.38, -1.2], [1.08, 0.38, -1.2]].forEach(pos => {
+                const w = createWheel(0.38, 0.32);
+                w.position.set(...pos);
+                group.add(w);
+            });
+
+            group.userData = { hitWidth: 2.1, hitLength: 4.2 };
+            return group;
+        }
+
+        // 2. CAMINHÃO CIBERNÉTICO DE CARGA
+        function createCyberTruck() {
+            const group = new THREE.Group();
+            const bodyMat = new THREE.MeshStandardMaterial({ color: 0x222533, metalness: 0.8, roughness: 0.2 });
+            const containerMat = new THREE.MeshStandardMaterial({ color: 0xf2a900, metalness: 0.4, roughness: 0.5 });
+            const stripeGlow = new THREE.MeshBasicMaterial({ color: 0xffd700 });
+
+            // Baú com faixas reflexivas
+            const box = new THREE.Mesh(new THREE.BoxGeometry(2.6, 2.4, 5.6), containerMat);
+            box.position.set(0, 1.9, 0.4);
+            group.add(box);
+
+            const stripeL = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.2, 5.6), stripeGlow);
+            stripeL.position.set(-1.31, 1.9, 0.4);
+            const stripeR = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.2, 5.6), stripeGlow);
+            stripeR.position.set(1.31, 1.9, 0.4);
+            group.add(stripeL, stripeR);
+
+            // Cabine do Caminhão
+            const cab = new THREE.Mesh(new THREE.BoxGeometry(2.5, 1.9, 1.9), bodyMat);
+            cab.position.set(0, 1.45, -2.8);
+            group.add(cab);
+
+            // Para-choque Reforçado
+            const bumper = new THREE.Mesh(new THREE.BoxGeometry(2.6, 0.4, 0.3), new THREE.MeshStandardMaterial({ color: 0x111111, metalness: 0.9 }));
+            bumper.position.set(0, 0.4, -3.7);
+            group.add(bumper);
+
+            // 6 Rodas Duplas Traseiras
+            [[-1.3, -2.8], [1.3, -2.8], [-1.3, 1.2], [1.3, 1.2], [-1.3, 2.3], [1.3, 2.3]].forEach(pos => {
+                const w = createWheel(0.48, 0.36);
+                w.position.set(pos[0], 0.48, pos[1]);
+                group.add(w);
+            });
+
+            group.userData = { hitWidth: 2.6, hitLength: 7.2 };
+            return group;
+        }
+
+        // 3. BARREIRA NEON DE SEGURANÇA COM CONES 3D
+        function createNeonBarrier() {
+            const group = new THREE.Group();
+            const metalMat = new THREE.MeshStandardMaterial({ color: 0x444444, metalness: 0.9, roughness: 0.2 });
+            const glowMat = new THREE.MeshBasicMaterial({ color: 0x00ff88 });
+
+            // Mureta central com luz neon
+            const fence = new THREE.Mesh(new THREE.BoxGeometry(3.2, 0.8, 0.4), metalMat);
+            fence.position.y = 0.6;
+            group.add(fence);
+
+            const lightStrip = new THREE.Mesh(new THREE.BoxGeometry(3.22, 0.15, 0.42), glowMat);
+            lightStrip.position.y = 0.75;
+            group.add(lightStrip);
+
+            // Cones de Sinalização nas Pontas
+            const coneGeo = new THREE.ConeGeometry(0.35, 0.9, 16);
+            const coneMat = new THREE.MeshStandardMaterial({ color: 0xff5500, roughness: 0.4 });
+            const stripeMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+
+            [-1.8, 1.8].forEach(x => {
+                const cone = new THREE.Mesh(coneGeo, coneMat);
+                cone.position.set(x, 0.45, 0);
+                
+                const ring = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.26, 0.18, 16), stripeMat);
+                ring.position.set(x, 0.5, 0);
+                
+                group.add(cone, ring);
+            });
+
+            group.userData = { hitWidth: 3.8, hitLength: 1.2 };
+            return group;
+        }
+
+        // --- CENA SETUP ---
+        const playerCar = createPlayerCar();
+        playerCar.position.set(0, 0, 10);
+        scene.add(playerCar);
+
+        camera.position.set(0, 4.0, 17.0);
+        camera.lookAt(playerCar.position.x, 0.8, playerCar.position.z - 10);
+
+        // Controles
+        const keys = { left: false, right: false };
+        window.addEventListener('keydown', e => {
+            if (e.key === 'ArrowLeft' || e.key === 'a') keys.left = true;
+            if (e.key === 'ArrowRight' || e.key === 'd') keys.right = true;
+        });
+        window.addEventListener('keyup', e => {
+            if (e.key === 'ArrowLeft' || e.key === 'a') keys.left = false;
+            if (e.key === 'ArrowRight' || e.key === 'd') keys.right = false;
+        });
+
+        // Loop de Animação
+        let obstacles = [];
+        let score = 0;
+        let speed = 0.9;
+        let isGameOver = false;
+        let frameCounter = 0;
+
+        function spawnObstacle() {
+            const rand = Math.random();
+            let obstacle;
+
+            if (rand < 0.4) {
+                obstacle = createRivalSportsCar();
+            } else if (rand < 0.7) {
+                obstacle = createCyberTruck();
+            } else {
+                obstacle = createNeonBarrier();
+            }
+
+            const lanes = [-4.5, -1.5, 1.5, 4.5];
+            const laneX = lanes[Math.floor(Math.random() * lanes.length)];
+            
+            obstacle.position.set(laneX, 0, -120);
+            scene.add(obstacle);
+            obstacles.push(obstacle);
+        }
+
+        function animate() {
+            if (isGameOver) return;
+            requestAnimationFrame(animate);
+
+            // Controles e Movimento do Jogador
+            const steerSpeed = 0.26;
+            const maxBound = (roadWidth / 2) - 1.5;
+
+            if (keys.left && playerCar.position.x > -maxBound) {
+                playerCar.position.x -= steerSpeed;
+                playerCar.rotation.z = 0.1;
+            } else if (keys.right && playerCar.position.x < maxBound) {
+                playerCar.position.x += steerSpeed;
+                playerCar.rotation.z = -0.1;
+            } else {
+                playerCar.rotation.z = 0;
+            }
+
+            // Movimento das Faixas
+            stripes.forEach(s => { s.position.z += speed; if (s.position.z > 30) s.position.z -= roadLength; });
+
+            // Spawn
+            frameCounter++;
+            if (frameCounter % Math.max(22, Math.floor(60 - score / 150)) === 0) {
+                spawnObstacle();
+            }
+
+            // Colisões e Atualizações
+            for (let i = obstacles.length - 1; i >= 0; i--) {
+                const obs = obstacles[i];
+                obs.position.z += speed;
+
+                const hitW = (obs.userData.hitWidth / 2) + 0.9;
+                const hitL = (obs.userData.hitLength / 2) + 1.6;
+
+                const dx = Math.abs(playerCar.position.x - obs.position.x);
+                const dz = Math.abs(playerCar.position.z - obs.position.z);
+
+                if (dx < hitW && dz < hitL) {
+                    isGameOver = true;
+                    document.getElementById('game-over').style.display = 'block';
+                }
+
+                if (obs.position.z > 25) {
+                    scene.remove(obs);
+                    obstacles.splice(i, 1);
+                }
+            }
+
+            score += 1;
+            speed += 0.0002;
+            document.getElementById('score').innerText = Math.floor(score / 10);
+
+            renderer.render(scene, camera);
+        }
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        animate();
+    </script>
 </body>
 </html>
