@@ -1,366 +1,92 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Corrida 3D - Supercarro Aerodinâmico</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boletim Escolar - Área do Aluno</title>
     <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            background-color: #030308;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: white;
-            user-select: none;
-        }
-        #ui {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 24px;
-            font-weight: 800;
-            color: #fff;
-            text-shadow: 0 0 12px #00f0ff, 2px 2px 6px #000;
-            z-index: 10;
-        }
-        #game-over {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(10, 10, 20, 0.95);
-            padding: 40px 60px;
-            border: 2px solid #ff0055;
-            border-radius: 16px;
-            text-align: center;
-            display: none;
-            z-index: 20;
-            box-shadow: 0 0 40px rgba(255, 0, 85, 0.5);
-            backdrop-filter: blur(8px);
-        }
-        #game-over h1 { color: #ff0055; margin-top: 0; font-size: 38px; text-shadow: 0 0 15px #ff0055; }
-        #game-over p { font-size: 18px; color: #cccccc; }
+        * { box-sizing: border-box; font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        body { background-color: #e2e8f0; font-size: 12px; color: #333; }
+        .top-bar { background-color: #1a5276; color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .header-title { background-color: #f39c12; color: white; text-align: center; padding: 8px; font-weight: bold; font-size: 15px; position: relative; }
+        .breadcrumb { position: absolute; right: 20px; top: 8px; font-size: 11px; font-weight: normal; }
+        .container { max-width: 1200px; margin: 15px auto; background: white; border-radius: 4px; border: 1px solid #ccc; padding: 20px; }
+        .school-title { font-weight: bold; font-size: 13px; margin-bottom: 12px; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 30px; font-size: 11px; margin-bottom: 20px; }
+        .info-grid span { font-weight: bold; color: #111; }
+        table { width: 100%; border-collapse: collapse; font-size: 11px; text-align: center; }
+        th, td { border: 1px solid #c0c0c0; padding: 6px; }
+        th { background-color: #f8f9fa; font-weight: bold; color: #333; }
+        .text-left { text-align: left; padding-left: 10px; }
+        .no-disp { color: #31708f; font-weight: bold; font-size: 11px; }
+        .info-icon { background-color: #31708f; color: white; border-radius: 50%; display: inline-block; width: 13px; height: 13px; line-height: 13px; text-align: center; font-size: 9px; margin-right: 3px; }
+        tr:nth-child(even) { background-color: #fafafa; }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
 
-    <div id="ui">⚡ PONTOS: <span id="score">0</span></div>
-    
-    <div id="game-over">
-        <h1>BATIDA INEVITÁVEL! 💥</h1>
-        <p>Seu veículo colidiu com um obstáculo na pista.</p>
-        <p>Aperte <b>F5</b> para reiniciar a corrida.</p>
+    <div class="top-bar">
+        <div><strong>🎓 Área do Aluno</strong></div>
+        <div>RENAN GUIMARAES DO ROSARIO</div>
     </div>
 
-    <script>
-        // --- CENA & RENDERER ---
-        const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x060814);
-        scene.fog = new THREE.FogExp2(0x060814, 0.006);
+    <div class="header-title">
+        Boletim Escolar
+        <span class="breadcrumb">Inicio > Consultar Boletim</span>
+    </div>
 
-        const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 1000);
+    <div class="container">
+        <div class="school-title">MACHADO DE A BARBOSA FERRAZ,C E-EMN ETI</div>
         
-        const renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        renderer.shadowMap.enabled = true;
-        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-        renderer.toneMapping = THREE.ACESFilmicToneMapping;
-        renderer.toneMappingExposure = 1.25;
-        document.body.appendChild(renderer.domElement);
+        <div class="info-grid">
+            <div>Aluno: <span>RENAN GUIMARAES DO ROSARIO</span></div>
+            <div>Curso: <span>ENSINO MEDIO IFA MAT/CNT 45H</span></div>
+            <div>CGM: <span>1007096786</span></div>
+            <div>Ano Letivo: <span>2026</span></div>
+            <div>Ano: <span>2ª série</span></div>
+        </div>
 
-        // --- ILUMINAÇÃO REFLITA PRATA METÁLICO ---
-        const ambientLight = new THREE.AmbientLight(0x8090b0, 1.1);
-        scene.add(ambientLight);
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2" style="width: 25%;">Disciplina</th>
+                    <th colspan="2">1º Trimestre</th>
+                    <th colspan="2">2º Trimestre</th>
+                    <th colspan="2">3º Trimestre</th>
+                    <th rowspan="2">Média Final</th>
+                    <th rowspan="2">Total Faltas</th>
+                </tr>
+                <tr>
+                    <th>Nota</th><th>Faltas</th>
+                    <th>Nota</th><th>Faltas</th>
+                    <th>Nota</th><th>Faltas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="text-left">ROBOTICA</td><td>9.5</td><td>0</td><td></td><td>0</td><td></td><td></td><td></td><td>0</td></tr>
+                <tr><td class="text-left">REDACAO E LEITURA I</td><td>9.2</td><td>0</td><td>9.0</td><td>0</td><td></td><td></td><td></td><td>0</td></tr>
+                <tr><td class="text-left">PROJETO DE VIDA I</td><td></td><td>0</td><td></td><td>0</td><td></td><td></td><td></td><td>0</td></tr>
+                <tr><td class="text-left">PROGRAMACAO</td><td>9.4</td><td>0</td><td>9.1</td><td>0</td><td></td><td></td><td></td><td>0</td></tr>
+                <tr><td class="text-left">PREPARACAO PARA O VESTIBULAR</td><td></td><td>0</td><td></td><td>0</td><td></td><td></td><td></td><td>0</td></tr>
+                <tr><td class="text-left">PRATICAS EXPERIMENTAIS I</td><td>9.3</td><td>2</td><td>9.2</td><td>0</td><td></td><td></td><td></td><td>2</td></tr>
+                <tr><td class="text-left">LINGUA ESPANHOLA</td><td><span class="no-disp"><span class="info-icon">i</span>NO</span></td><td>0</td><td><span class="no-disp"><span class="info-icon">i</span>NO</span></td><td></td><td><span class="no-disp"><span class="info-icon">i</span>NO</span></td><td></td><td><span class="no-disp"><span class="info-icon">i</span>NO</span></td><td>0</td></tr>
+                <tr><td class="text-left">FISICA E TECNOCIENCIA</td><td>9.0</td><td>0</td><td>9.3</td><td>0</td><td></td><td></td><td></td><td>0</td></tr>
+                <tr><td class="text-left">ESTUDO ORIENTADO I</td><td>9.1</td><td>0</td><td>9.5</td><td>1</td><td></td><td></td><td></td><td>1</td></tr>
+                <tr><td class="text-left">ELETIVA I</td><td></td><td>0</td><td></td><td>0</td><td></td><td></td><td></td><td>0</td></tr>
+                <tr><td class="text-left">CORRESP SOCIAL SUSTENT I</td><td>9.2</td><td>0</td><td>9.1</td><td>0</td><td></td><td></td><td></td><td>0</td></tr>
+                <tr><td class="text-left">SOCIOLOGIA</td><td>10.0</td><td>0</td><td>9.4</td><td>1</td><td></td><td></td><td></td><td>1</td></tr>
+                <tr><td class="text-left">MATEMATICA</td><td>9.4</td><td>1</td><td>9.2</td><td>0</td><td></td><td></td><td></td><td>1</td></tr>
+                <tr><td class="text-left">LINGUA PORTUGUESA</td><td>9.0</td><td>5</td><td></td><td>0</td><td></td><td></td><td></td><td>5</td></tr>
+                <tr><td class="text-left">LINGUA INGLESA</td><td>9.0</td><td>0</td><td>9.3</td><td>1</td><td></td><td></td><td></td><td>1</td></tr>
+                <tr><td class="text-left">HISTORIA</td><td>9.1</td><td>0</td><td>9.0</td><td>1</td><td></td><td></td><td></td><td>1</td></tr>
+                <tr><td class="text-left">FISICA</td><td>9.0</td><td>0</td><td>9.2</td><td>1</td><td></td><td></td><td></td><td>1</td></tr>
+                <tr><td class="text-left">FILOSOFIA</td><td>9.1</td><td>0</td><td>9.4</td><td>1</td><td></td><td></td><td></td><td>1</td></tr>
+                <tr><td class="text-left">EDUCACAO FISICA</td><td>9.5</td><td>0</td><td>9.0</td><td>0</td><td></td><td></td><td></td><td>0</td></tr>
+                <tr><td class="text-left">EDUCACAO FINANCEIRA</td><td>9.2</td><td>0</td><td>9.1</td><td>0</td><td></td><td></td><td></td><td>0</td></tr>
+                <tr><td class="text-left">ARTE</td><td>9.0</td><td>0</td><td>9.3</td><td>0</td><td></td><td></td><td></td><td>0</td></tr>
+            </tbody>
+        </table>
+    </div>
 
-        const dirLight = new THREE.DirectionalLight(0xffffff, 2.0);
-        dirLight.position.set(20, 40, 15);
-        dirLight.castShadow = true;
-        dirLight.shadow.mapSize.width = 2048;
-        dirLight.shadow.mapSize.height = 2048;
-        scene.add(dirLight);
-
-        const fillLight = new THREE.DirectionalLight(0x4466aa, 0.8);
-        fillLight.position.set(-20, 20, -10);
-        scene.add(fillLight);
-
-        // --- PISTA ---
-        const roadWidth = 15;
-        const roadLength = 300;
-
-        const roadGeo = new THREE.PlaneGeometry(roadWidth, roadLength);
-        const roadMat = new THREE.MeshStandardMaterial({ color: 0x111116, roughness: 0.4, metalness: 0.2 });
-        const road = new THREE.Mesh(roadGeo, roadMat);
-        road.rotation.x = -Math.PI / 2;
-        road.receiveShadow = true;
-        scene.add(road);
-
-        // Faixas na pista
-        const stripes = [];
-        const stripeGeo = new THREE.PlaneGeometry(0.35, 4.5);
-        const stripeMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
-        
-        [-2.5, 2.5].forEach(laneX => {
-            for (let z = -roadLength / 2; z < roadLength / 2; z += 10) {
-                const stripe = new THREE.Mesh(stripeGeo, stripeMat);
-                stripe.rotation.x = -Math.PI / 2;
-                stripe.position.set(laneX, 0.02, z);
-                scene.add(stripe);
-                stripes.push(stripe);
-            }
-        });
-
-        // --- GERADOR DE RODA ESPORTIVA CURVA ---
-        function createCurvedWheel(radius, width) {
-            const wheelGroup = new THREE.Group();
-
-            const tireMat = new THREE.MeshStandardMaterial({ color: 0x121212, roughness: 0.7 });
-            const tire = new THREE.Mesh(new THREE.CylinderGeometry(radius, radius, width, 32), tireMat);
-            tire.rotation.z = Math.PI / 2;
-            tire.castShadow = true;
-            wheelGroup.add(tire);
-
-            const rimMat = new THREE.MeshStandardMaterial({ color: 0xdddddd, metalness: 0.95, roughness: 0.1 });
-            const rimCenter = new THREE.Mesh(new THREE.CylinderGeometry(radius * 0.65, radius * 0.65, width + 0.01, 24), rimMat);
-            rimCenter.rotation.z = Math.PI / 2;
-            wheelGroup.add(rimCenter);
-
-            const spokeMat = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, metalness: 0.8, roughness: 0.2 });
-            for (let i = 0; i < 5; i++) {
-                const spoke = new THREE.Mesh(new THREE.BoxGeometry(width + 0.02, radius * 1.1, radius * 0.1), spokeMat);
-                spoke.rotation.x = (i * Math.PI) / 2.5;
-                wheelGroup.add(spoke);
-            }
-
-            return wheelGroup;
-        }
-
-        // --- SUPERCARRO GT COM CURVAS ORGÂNICAS ---
-        function createSleekSupercar() {
-            const carGroup = new THREE.Group();
-
-            // Pintura Cinza/Prata Prata Metálico Verniz (Como na imagem do Ford GT)
-            const silverPaint = new THREE.MeshPhysicalMaterial({
-                color: 0x8a929e,
-                metalness: 0.92,
-                roughness: 0.12,
-                clearcoat: 1.0,
-                clearcoatRoughness: 0.02,
-                reflectivity: 1.0
-            });
-
-            const carbonMat = new THREE.MeshStandardMaterial({ color: 0x0f1013, roughness: 0.3, metalness: 0.8 });
-            const glassMat = new THREE.MeshPhysicalMaterial({ color: 0x02050a, roughness: 0.0, transparent: true, opacity: 0.88, metalness: 0.9 });
-
-            // 1. Chassi Aerodinâmico Curvado (Extrude com Bevel Suave)
-            const profileShape = new THREE.Shape();
-            profileShape.moveTo(-2.1, 0.22);
-            profileShape.quadraticCurveTo(-1.8, 0.42, -1.0, 0.48); // Bico rebaixado
-            profileShape.quadraticCurveTo(-0.4, 0.52, -0.25, 0.88); // Para-brisa fluido
-            profileShape.quadraticCurveTo(0.2, 0.98, 0.7, 0.85);   // Teto curvo
-            profileShape.quadraticCurveTo(1.3, 0.58, 2.1, 0.42);   // Traseira fluida
-            profileShape.lineTo(2.1, 0.22);
-            profileShape.lineTo(-2.1, 0.22);
-
-            const extrudeSettings = {
-                steps: 2,
-                depth: 1.7,
-                bevelEnabled: true,
-                bevelThickness: 0.28,
-                bevelSize: 0.22,
-                bevelOffset: 0,
-                bevelSegments: 8
-            };
-
-            const bodyGeo = new THREE.ExtrudeGeometry(profileShape, extrudeSettings);
-            bodyGeo.center();
-            const mainBody = new THREE.Mesh(bodyGeo, silverPaint);
-            mainBody.rotation.y = Math.PI / 2;
-            mainBody.position.y = 0.55;
-            mainBody.castShadow = true;
-            carGroup.add(mainBody);
-
-            // 2. Paralamas Dianteiros Arredondados
-            [-1.0, 1.0].forEach(x => {
-                const fenderGeo = new THREE.SphereGeometry(0.55, 32, 16);
-                fenderGeo.scale(0.8, 0.55, 1.6);
-                const fender = new THREE.Mesh(fenderGeo, silverPaint);
-                fender.position.set(x, 0.58, -1.1);
-                fender.castShadow = true;
-                carGroup.add(fender);
-            });
-
-            // 3. Extrator de Ar Duplo do Capô (Entradas escuras no capô)
-            [-0.35, 0.35].forEach(x => {
-                const vent = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.05, 0.7), carbonMat);
-                vent.position.set(x, 0.67, -1.0);
-                vent.rotation.x = 0.15;
-                carGroup.add(vent);
-            });
-
-            // 4. Paralamas Traseiros Largos (Haunches)
-            [-1.02, 1.02].forEach(x => {
-                const rearFenderGeo = new THREE.SphereGeometry(0.62, 32, 16);
-                rearFenderGeo.scale(0.85, 0.6, 1.8);
-                const rearFender = new THREE.Mesh(rearFenderGeo, silverPaint);
-                rearFender.position.set(x, 0.65, 1.0);
-                rearFender.castShadow = true;
-                carGroup.add(rearFender);
-            });
-
-            // 5. Cockpit Arredondado (Vidro em Gota)
-            const cabinGeo = new THREE.SphereGeometry(0.85, 32, 16);
-            cabinGeo.scale(0.9, 0.6, 1.6);
-            const cabin = new THREE.Mesh(cabinGeo, glassMat);
-            cabin.position.set(0, 0.92, -0.15);
-            carGroup.add(cabin);
-
-            // 6. Faróis LED Circulares Integrados
-            const headlightMat = new THREE.MeshBasicMaterial({ color: 0xe0f7ff });
-            [-0.75, 0.75].forEach(x => {
-                const headlight = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.18, 0.08, 24), headlightMat);
-                headlight.rotation.x = Math.PI / 2;
-                headlight.position.set(x, 0.58, -1.92);
-                carGroup.add(headlight);
-
-                const spotLight = new THREE.PointLight(0x80d8ff, 3.0, 35);
-                spotLight.position.set(x, 0.58, -2.1);
-                carGroup.add(spotLight);
-            });
-
-            // 7. Rodas
-            [[-1.05, 0.38, 1.25], [1.05, 0.38, 1.25], [-1.05, 0.38, -1.25], [1.05, 0.38, -1.25]].forEach(pos => {
-                const wheel = createCurvedWheel(0.38, 0.32);
-                wheel.position.set(...pos);
-                carGroup.add(wheel);
-            });
-
-            // Luz Underglow suave azul
-            const glow = new THREE.Mesh(new THREE.PlaneGeometry(2.4, 4.4), new THREE.MeshBasicMaterial({ color: 0x00a2ff, transparent: true, opacity: 0.35 }));
-            glow.rotation.x = -Math.PI / 2;
-            glow.position.y = 0.05;
-            carGroup.add(glow);
-
-            return carGroup;
-        }
-
-        // --- OBSTÁCULO TIPO CARRO INIMIGO ---
-        function createRivalCar() {
-            const group = new THREE.Group();
-            const mat = new THREE.MeshStandardMaterial({ color: 0xcc0033, roughness: 0.2, metalness: 0.8 });
-            
-            const shape = new THREE.Shape();
-            shape.moveTo(-2.0, 0.2);
-            shape.quadraticCurveTo(-0.3, 0.5, -0.2, 0.9);
-            shape.quadraticCurveTo(0.3, 0.95, 2.0, 0.3);
-            shape.lineTo(-2.0, 0.2);
-
-            const bodyGeo = new THREE.ExtrudeGeometry(shape, { depth: 1.6, bevelEnabled: true, bevelThickness: 0.25, bevelSize: 0.2, bevelSegments: 6 });
-            bodyGeo.center();
-            const body = new THREE.Mesh(bodyGeo, mat);
-            body.rotation.y = Math.PI / 2;
-            body.position.y = 0.55;
-            group.add(body);
-
-            [[-1.0, 0.38, 1.2], [1.0, 0.38, 1.2], [-1.0, 0.38, -1.2], [1.0, 0.38, -1.2]].forEach(pos => {
-                const w = createCurvedWheel(0.38, 0.3);
-                w.position.set(...pos);
-                group.add(w);
-            });
-
-            group.userData = { hitWidth: 2.2, hitLength: 4.2 };
-            return group;
-        }
-
-        // --- CENA SETUP ---
-        const playerCar = createSleekSupercar();
-        playerCar.position.set(0, 0, 10);
-        scene.add(playerCar);
-
-        camera.position.set(0, 3.6, 16.5);
-        camera.lookAt(playerCar.position.x, 0.7, playerCar.position.z - 10);
-
-        const keys = { left: false, right: false };
-        window.addEventListener('keydown', e => {
-            if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') keys.left = true;
-            if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') keys.right = true;
-        });
-        window.addEventListener('keyup', e => {
-            if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') keys.left = false;
-            if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') keys.right = false;
-        });
-
-        let obstacles = [];
-        let score = 0;
-        let speed = 0.9;
-        let isGameOver = false;
-        let frameCounter = 0;
-
-        function spawnObstacle() {
-            const obstacle = createRivalCar();
-            const lanes = [-4.5, -1.5, 1.5, 4.5];
-            obstacle.position.set(lanes[Math.floor(Math.random() * lanes.length)], 0, -120);
-            scene.add(obstacle);
-            obstacles.push(obstacle);
-        }
-
-        function animate() {
-            if (isGameOver) return;
-            requestAnimationFrame(animate);
-
-            const steerSpeed = 0.26;
-            const maxBound = (roadWidth / 2) - 1.5;
-
-            if (keys.left && playerCar.position.x > -maxBound) {
-                playerCar.position.x -= steerSpeed;
-                playerCar.rotation.z = 0.1;
-            } else if (keys.right && playerCar.position.x < maxBound) {
-                playerCar.position.x += steerSpeed;
-                playerCar.rotation.z = -0.1;
-            } else {
-                playerCar.rotation.z = 0;
-            }
-
-            stripes.forEach(s => { s.position.z += speed; if (s.position.z > 30) s.position.z -= roadLength; });
-
-            frameCounter++;
-            if (frameCounter % Math.max(25, Math.floor(60 - score / 150)) === 0) {
-                spawnObstacle();
-            }
-
-            for (let i = obstacles.length - 1; i >= 0; i--) {
-                const obs = obstacles[i];
-                obs.position.z += speed;
-
-                const hitW = (obs.userData.hitWidth / 2) + 0.9;
-                const hitL = (obs.userData.hitLength / 2) + 1.6;
-
-                if (Math.abs(playerCar.position.x - obs.position.x) < hitW &&
-                    Math.abs(playerCar.position.z - obs.position.z) < hitL) {
-                    isGameOver = true;
-                    document.getElementById('game-over').style.display = 'block';
-                }
-
-                if (obs.position.z > 25) {
-                    scene.remove(obs);
-                    obstacles.splice(i, 1);
-                }
-            }
-
-            score += 1;
-            speed += 0.0002;
-            document.getElementById('score').innerText = Math.floor(score / 10);
-
-            renderer.render(scene, camera);
-        }
-
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-
-        animate();
-    </script>
 </body>
 </html>
